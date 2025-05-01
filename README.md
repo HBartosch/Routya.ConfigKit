@@ -2,7 +2,7 @@
 
 > 🔧 A lightweight, source-generated configuration binder for .NET — just tag your class with `[ConfigSection]` and go.
 
-![CI](https://img.shields.io/github/actions/workflow/status/hbartosch/routya.configkit/dotnet.yml?label=CI&style=flat-square)
+![CI](https://img.shields.io/github/actions/workflow/status/hbartosch/routya.configkit/dotnet-routya-configkit-generator.yml?label=CI&style=flat-square)
 ![CI](https://img.shields.io/github/actions/workflow/status/hbartosch/routya.configkit/build-and-test.yml?label=Build&style=flat-square)
 [![NuGet](https://img.shields.io/nuget/v/Routya.ConfigKit.Generator)](https://www.nuget.org/packages/Routya.ConfigKit.Generator)
 [![NuGet](https://img.shields.io/nuget/dt/Routya.ConfigKit.Generator)](https://www.nuget.org/packages/Routya.ConfigKit.Generator)
