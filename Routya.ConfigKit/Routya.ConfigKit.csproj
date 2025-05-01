@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Nullable>enable</Nullable>
+		<Title>Routya.ConfigKit</Title>
+		<Authors>Henry Bartosch</Authors>
+		<PackageId>Routya.ConfigKit</PackageId>
+		<PackageTags>Routya;Routya.ConfigKit.Generator helper</PackageTags>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>PackageIconResized.png</PackageIcon>
+		<Description>Routya.ConfigKit provides shared types for configuration binding in .NET applications, including the [ConfigSection] attribute and ConfigBindingMode enum. These types are consumed by Routya.ConfigKit.Generator at compile time and are required to annotate strongly-typed options classes in consuming applications.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="9.0.4" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\LICENSE" Pack="true" PackagePath="" />
+		<None Include="..\README.md" Pack="true" PackagePath="" />
+		<None Include="PackageIconResized.png" Pack="true" PackagePath="" />
+	</ItemGroup>
+</Project>

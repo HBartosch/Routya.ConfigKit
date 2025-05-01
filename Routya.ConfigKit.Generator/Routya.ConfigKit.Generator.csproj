@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<OutputItemType>Analyzer</OutputItemType>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<IsRoslynComponent>true</IsRoslynComponent>
+		<Nullable>enable</Nullable>
+		<Title>Routya.ConfigKit.Generator</Title>
+		<Authors>Henry Bartosch</Authors>
+		<PackageId>Routya.ConfigKit.Generator</PackageId>
+		<PackageTags>source-generator;configuration;strongly-typed;options;IOptions&lt;T&gt;;appsettings;dependency-injection;validation;dataannotations;compile-time;config-binding;roslyn;incremental-generator;Routya</PackageTags>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>PackageIconResized.png</PackageIcon>
+		<Description>Routya.ConfigKit.Generator is a Roslyn source generator that produces strongly-typed configuration binding methods at compile time. When used with [ConfigSection] from Routya.ConfigKit, it automatically emits service registration and validation code for options classes, including support for IOptions&lt;T&gt;, AddSingleton, and DataAnnotations validation.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\LICENSE" Pack="true" PackagePath="" />
+		<None Include="..\README.md" Pack="true" PackagePath="" />
+		<None Include="PackageIconResized.png" Pack="true" PackagePath="" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="true" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	  <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0" PrivateAssets="all" />
+	  <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.4" />
+	  <PackageReference Include="Routya.ConfigKit" Version="1.0.0" />
+	</ItemGroup>
+</Project>
