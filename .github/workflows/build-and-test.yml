@@ -31,7 +31,7 @@ jobs:
       run: dotnet pack Routya.ConfigKit/Routya.ConfigKit.csproj --no-build --configuration Release --output ./nupkg-local
     
     - name: 🛠 Add local feed as NuGet source
-      run: dotnet nuget add source ./nupkg-local --name LocalFeed
+      run: dotnet nuget add source "${{ github.workspace }}/nupkg-local" --name LocalFeed
 
     - name: Restore dependencies
       run: dotnet restore Routya.ConfigKit.Test/Routya.ConfigKit.Test.csproj
