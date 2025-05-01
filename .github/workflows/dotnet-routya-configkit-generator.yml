@@ -1,16 +1,12 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
 name: Publish Nuget Package
 
 on:
   push:
-    tags: 
+    tags:
       - 'v*'
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -25,22 +21,21 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Build
-        run: dotnet build Routya.ConfigKit/Routya.ConfigKit.csproj --configuration Release
-      
       - name: 🗂️ Create local NuGet feed directory
         run: mkdir ./nupkg-local
 
-      - name: 📦 Pack Routya.ConfigKit
-        run: dotnet pack Routya.ConfigKit/Routya.ConfigKit.csproj --configuration Release --output ./nupkg-local
+      - name: 📦 Build & Pack Routya.ConfigKit
+        run: |
+          dotnet build Routya.ConfigKit/Routya.ConfigKit.csproj --configuration Release
+          dotnet pack Routya.ConfigKit/Routya.ConfigKit.csproj --no-build --configuration Release --output ./nupkg-local
 
       - name: 🛠 Add local feed as NuGet source
         run: dotnet nuget add source "${{ github.workspace }}/nupkg-local" --name LocalFeed
 
-      - name: 📦 Restore and pack Routya.ConfigKit.Generator
+      - name: 📦 Build & Pack Routya.ConfigKit.Generator
         run: |
-          dotnet restore Routya.ConfigKit.Generator/Routya.ConfigKit.Generator.csproj
-          dotnet pack Routya.ConfigKit.Generator/Routya.ConfigKit.Generator.csproj --configuration Release --output ./nupkgs
+          dotnet build Routya.ConfigKit.Generator/Routya.ConfigKit.Generator.csproj --configuration Release
+          dotnet pack Routya.ConfigKit.Generator/Routya.ConfigKit.Generator.csproj --no-build --configuration Release --output ./nupkgs
 
       - name: 🚀 Push Routya.ConfigKit to NuGet
         run: dotnet nuget push "./nupkg-local/Routya.ConfigKit.*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
