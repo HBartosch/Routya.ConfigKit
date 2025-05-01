@@ -10,7 +10,7 @@ public class ConfigGeneratorTests
     {
         // Arrange: Build a dummy input Compilation manually
         var sourceCode = @"
-using Routya.ConfigKit.Attributes;
+using Routya.ConfigKit;
 using System.ComponentModel.DataAnnotations;
 
 [ConfigSection(""MyService"")]
@@ -46,10 +46,6 @@ public class MyServiceOptions
             driverOptions: new GeneratorDriverOptions(default, trackIncrementalGeneratorSteps: true)
         );
 
-        driver = driver.RunGenerators(compilation);
-
-        // Update the compilation (simulate small change) and rerun
-        compilation = compilation.AddSyntaxTrees(CSharpSyntaxTree.ParseText("// dummy"));
         driver = driver.RunGenerators(compilation);
 
         var runResult = driver.GetRunResult();

@@ -25,6 +25,9 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
+      - name: Build
+        run: dotnet build Routya.ConfigKit/Routya.ConfigKit.csproj --configuration Release
+      
       - name: 🗂️ Create local NuGet feed directory
         run: mkdir ./nupkg-local
 
@@ -32,7 +35,7 @@ jobs:
         run: dotnet pack Routya.ConfigKit/Routya.ConfigKit.csproj --configuration Release --output ./nupkg-local
 
       - name: 🛠 Add local feed as NuGet source
-        run: dotnet nuget add source ./nupkg-local --name LocalFeed
+        run: dotnet nuget add source "${{ github.workspace }}/nupkg-local" --name LocalFeed
 
       - name: 📦 Restore and pack Routya.ConfigKit.Generator
         run: |
