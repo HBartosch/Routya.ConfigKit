@@ -14,12 +14,21 @@ jobs:
 
     steps:
     - name: Checkout repo
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+        
+    - name: 🗂️ Create local NuGet feed directory
+      run: mkdir ./nupkg-local
+    
+    - name: 📦 Pack Routya.ConfigKit
+      run: dotnet pack Routya.ConfigKit/Routya.ConfigKit.csproj --configuration Release --output ./nupkg-local
+    
+    - name: 🛠 Add local feed as NuGet source
+      run: dotnet nuget add source ./nupkg-local --name LocalFeed
 
     - name: Restore dependencies
       run: dotnet restore Routya.ConfigKit.Test/Routya.ConfigKit.Test.csproj
