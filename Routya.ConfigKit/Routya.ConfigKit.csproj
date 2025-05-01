@@ -11,6 +11,8 @@
 		<PackageTags>Routya;Routya.ConfigKit.Generator helper</PackageTags>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/HBartosch/Routya.ConfigKit</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/HBartosch/Routya.ConfigKit</PackageProjectUrl>
 		<PackageIcon>PackageIconResized.png</PackageIcon>
 		<Description>Routya.ConfigKit provides shared types for configuration binding in .NET applications, including the [ConfigSection] attribute and ConfigBindingMode enum. These types are consumed by Routya.ConfigKit.Generator at compile time and are required to annotate strongly-typed options classes in consuming applications.</Description>
 	</PropertyGroup>

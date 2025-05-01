@@ -14,6 +14,8 @@
 		<Authors>Henry Bartosch</Authors>
 		<PackageId>Routya.ConfigKit.Generator</PackageId>
 		<PackageTags>source-generator;configuration;strongly-typed;options;IOptions&lt;T&gt;;appsettings;dependency-injection;validation;dataannotations;compile-time;config-binding;roslyn;incremental-generator;Routya</PackageTags>
+		<RepositoryUrl>https://github.com/HBartosch/Routya.ConfigKit</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/HBartosch/Routya.ConfigKit</PackageProjectUrl>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageIcon>PackageIconResized.png</PackageIcon>

@@ -30,43 +30,12 @@ namespace Routya.ConfigKit.Generator.Parsers
                 if (property == null)
                     continue;
 
-                var propModel = new ConfigPropertyModel
-                {
-                    Name = property.Identifier.Text,
-                    TypeName = property.Type.ToString()
-                };
-
-                var symbol = semanticModel.GetDeclaredSymbol(property);
-                if (symbol != null)
-                {
-                    foreach (var attr in symbol.GetAttributes())
+                model.Properties.Add(
+                    new ConfigPropertyModel
                     {
-                        var attrName = attr.AttributeClass.Name;
-
-                        if (attrName == ParserConstants.RequiredAttribute)
-                        {
-                            propModel.IsRequired = true;
-                        }
-                        else if (attrName == ParserConstants.RangeAttribute)
-                        {
-                            var min = attr.ConstructorArguments[0].Value;
-                            var max = attr.ConstructorArguments[1].Value;
-
-                            if (min is int)
-                                propModel.MinValue = (int)min;
-                            if (max is int)
-                                propModel.MaxValue = (int)max;
-                        }
-                    }
-                }
-
-                if (property.Initializer != null)
-                {
-                    var defaultValueText = property.Initializer.Value.ToString();
-                    propModel.DefaultValue = defaultValueText;
-                }
-
-                model.Properties.Add(propModel);
+                        Name = property.Identifier.Text,
+                        TypeName = property.Type.ToString()
+                    });
             }
 
             return model;
@@ -110,13 +79,13 @@ namespace Routya.ConfigKit.Generator.Parsers
                             var paramName = paramSymbol?.Name;
 
                             // Positional or named — both work
-                            if (paramName == "sectionName")
+                            if (paramName == ParserConstants.SectionParameterName)
                             {
                                 var constVal = semanticModel.GetConstantValue(arg.Expression);
                                 if (constVal.HasValue && constVal.Value is string str)
                                     sectionName = str;
                             }
-                            else if (paramName == "mode")
+                            else if (paramName == ParserConstants.ConfigBindingModeParameterName)
                             {
                                 var fieldSymbol = semanticModel.GetSymbolInfo(arg.Expression).Symbol as IFieldSymbol;
                                 if (fieldSymbol?.ContainingType?.Name == nameof(ConfigBindingMode))
