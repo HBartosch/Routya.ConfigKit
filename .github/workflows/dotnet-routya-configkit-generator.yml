@@ -1,4 +1,4 @@
-name: Publish Nuget Package
+name: Publish NuGet Package
 
 on:
   push:
@@ -21,13 +21,17 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
+      - name: 📌 Get version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+
       - name: 🗂️ Create local NuGet feed directory
         run: mkdir ./nupkg-local
 
       - name: 📦 Build & Pack Routya.ConfigKit
         run: |
           dotnet build Routya.ConfigKit/Routya.ConfigKit.csproj --configuration Release
-          dotnet pack Routya.ConfigKit/Routya.ConfigKit.csproj --no-build --configuration Release --output ./nupkg-local
+          dotnet pack Routya.ConfigKit/Routya.ConfigKit.csproj --no-build --configuration Release --output ./nupkg-local /p:PackageVersion=${{ env.VERSION }}
 
       - name: 🛠 Add local feed as NuGet source
         run: dotnet nuget add source "${{ github.workspace }}/nupkg-local" --name LocalFeed
@@ -35,7 +39,7 @@ jobs:
       - name: 📦 Build & Pack Routya.ConfigKit.Generator
         run: |
           dotnet build Routya.ConfigKit.Generator/Routya.ConfigKit.Generator.csproj --configuration Release
-          dotnet pack Routya.ConfigKit.Generator/Routya.ConfigKit.Generator.csproj --no-build --configuration Release --output ./nupkgs
+          dotnet pack Routya.ConfigKit.Generator/Routya.ConfigKit.Generator.csproj --no-build --configuration Release --output ./nupkgs /p:PackageVersion=${{ env.VERSION }}
 
       - name: 🚀 Push Routya.ConfigKit to NuGet
         run: dotnet nuget push "./nupkg-local/Routya.ConfigKit.*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
