@@ -39,10 +39,13 @@
 	  </PackageReference>
 	  <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0" PrivateAssets="all" />
 	  <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.4" PrivateAssets="all" />
-	  <PackageReference Include="Routya.ConfigKit" Version="1.0.0" GeneratePathProperty="true" PrivateAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="$(PKGRoutya_ConfigKit)\lib\netstandard2.0\*.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+	  <ProjectReference Include="..\Routya.ConfigKit\Routya.ConfigKit.csproj" PrivateAssets="all" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="$(OutputPath)\Routya.ConfigKit.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
 	</ItemGroup>
 </Project>
